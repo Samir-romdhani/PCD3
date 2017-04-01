@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserCreateDlg" widgetVar="UserCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserTitle}">
+            <h:form id="UserCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.CreateUserLabel_userName}" for="userName" />
+                        <p:inputText id="userName" value="#{userController.selected.userName}" title="#{bundle.CreateUserTitle_userName}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_userPass}" for="userPass" />
+                        <p:inputText id="userPass" value="#{userController.selected.userPass}" title="#{bundle.CreateUserTitle_userPass}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_userRole}" for="userRole" />
+                        <p:inputText id="userRole" value="#{userController.selected.userRole}" title="#{bundle.CreateUserTitle_userRole}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_userMail}" for="userMail" />
+                        <p:inputText id="userMail" value="#{userController.selected.userMail}" title="#{bundle.CreateUserTitle_userMail}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userController.create}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
